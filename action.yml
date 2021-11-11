@@ -1,0 +1,23 @@
+name: 'PetrmoAction1'
+description: 'Just testing, do not use'
+author: petrmo
+branding:
+  icon: 'slash'  
+  color: 'red'
+inputs:
+  MyInput:  # id of input
+    description: 'Just an input'
+    required: true
+    default: 'Hello'
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+    - run: echo PetrmoAction1 says ${{ inputs.MyInput }}.
+      shell: bash
+    - id: random-number-generator
+      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+      shell: bash
